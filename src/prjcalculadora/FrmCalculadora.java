@@ -7,9 +7,12 @@ package prjcalculadora;
 
 public class FrmCalculadora extends javax.swing.JFrame {
     ClassCalculadora ObjCal = new ClassCalculadora();
+    String operacion = "";
     
     public FrmCalculadora() {
         initComponents();
+        
+        setLocationRelativeTo(null);
         
         //Verifica si se puede resetear el TextField
         ObjCal.PEstaLimpioSet(true);
@@ -1078,8 +1081,11 @@ public class FrmCalculadora extends javax.swing.JFrame {
     ///BOTON IGUAL
     private void BtnIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIgualActionPerformed
         ObjCal.PNumero2Set(Double.parseDouble(TxtNum.getText()));
-        TxtPreviu.setText(TxtPreviu.getText() + TxtNum.getText() + " =");
         
+        operacion += TxtNum.getText();
+        TxtPreviu.setText(operacion);
+        
+        ObjCal.setFormula(operacion);
         ObjCal.PCalculaOperaciones();
         
         ObjCal.PEstaLimpioSet(true);
@@ -1147,8 +1153,10 @@ public class FrmCalculadora extends javax.swing.JFrame {
 
     //BOTON SUMA
     private void BtnSumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSumaActionPerformed
-        ObjCal.PNumero1Set(Double.parseDouble(TxtNum.getText()));
-        TxtPreviu.setText(ObjCal.PNumero1Get() + " + ");
+        operacion += TxtNum.getText() + "+";
+        
+        TxtPreviu.setText(operacion);
+        TxtNum.setText("");
         
         ObjCal.PEstaLimpioSet(true);
         ObjCal.POperacionSet("suma");
@@ -1217,8 +1225,10 @@ public class FrmCalculadora extends javax.swing.JFrame {
 
     //BOTON RESTA
     private void BtnRestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRestaActionPerformed
-        ObjCal.PNumero1Set(Double.parseDouble(TxtNum.getText()));
-        TxtPreviu.setText(ObjCal.PNumero1Get() + " - ");
+        operacion += TxtNum.getText() + "-";
+        
+        TxtPreviu.setText(operacion);
+        TxtNum.setText("");
         
         ObjCal.PEstaLimpioSet(true);
         ObjCal.POperacionSet("resta");
@@ -1291,8 +1301,10 @@ public class FrmCalculadora extends javax.swing.JFrame {
 
     //BOTON MULTIPLICACION
     private void BtnMultiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMultiActionPerformed
-        ObjCal.PNumero1Set(Double.parseDouble(TxtNum.getText()));
-        TxtPreviu.setText(ObjCal.PNumero1Get() + " + ");
+        operacion += TxtNum.getText() + "*";
+        
+        TxtPreviu.setText(operacion);
+        TxtNum.setText("");
         
         ObjCal.PEstaLimpioSet(true);
         ObjCal.POperacionSet("multiplicacion");
@@ -1333,8 +1345,10 @@ public class FrmCalculadora extends javax.swing.JFrame {
 
     //BOTON DIVISION
     private void BtnDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDivisionActionPerformed
-        ObjCal.PNumero1Set(Double.parseDouble(TxtNum.getText()));
-        TxtPreviu.setText(ObjCal.PNumero1Get() + " + ");
+        operacion += TxtNum.getText() + "/";
+        
+        TxtPreviu.setText(operacion);
+        TxtNum.setText("");
         
         ObjCal.PEstaLimpioSet(true);
         ObjCal.POperacionSet("division");
@@ -1494,6 +1508,8 @@ public class FrmCalculadora extends javax.swing.JFrame {
         ObjCal.PNumero2Set(0);
         ObjCal.PUnicoSet(0);
         ObjCal.PResultadoSet(0);
+        
+        operacion = "";
     }//GEN-LAST:event_BtnCActionPerformed
 
     //BOTON SECANTE
